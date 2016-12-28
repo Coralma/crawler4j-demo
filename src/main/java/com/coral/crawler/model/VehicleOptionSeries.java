@@ -6,5 +6,21 @@ package com.coral.crawler.model;
 public class VehicleOptionSeries {
 
     Integer seriesid;
-    VehicleOptionValueItem[] configtypeitems;
+    VehicleOptionTypeItem[] configtypeitems;
+
+    public Integer getSeriesid() {
+        return seriesid;
+    }
+
+    public void setSeriesid(Integer seriesid) {
+        this.seriesid = seriesid;
+    }
+
+    public VehicleOptionTypeItem[] getConfigtypeitems() {
+        return configtypeitems;
+    }
+
+    public void setConfigtypeitems(VehicleOptionTypeItem[] configtypeitems) {
+        this.configtypeitems = configtypeitems;
+    }
 }

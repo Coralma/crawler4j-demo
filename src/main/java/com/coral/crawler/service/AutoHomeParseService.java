@@ -1,7 +1,6 @@
-package com.coral.crawler;
+package com.coral.crawler.service;
 
 import java.util.Date;
-import java.util.regex.Pattern;
 
 import com.coral.crawler.model.VehicleConfig;
 import com.coral.crawler.model.VehicleConfigItem;
@@ -15,58 +14,26 @@ import com.coral.crawler.mongoDao.CrawlURLDao;
 import com.coral.crawler.mongoDao.VehicleDao;
 import com.coral.crawler.mongoModel.CrawlURL;
 import com.coral.crawler.mongoModel.Vehicle;
-import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import edu.uci.ics.crawler4j.crawler.Page;
-import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
-import edu.uci.ics.crawler4j.url.WebURL;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * Created by CCC on 2015/11/19.
+ * Created by CCC on 2016/12/28.
  */
-public class MyCrawler extends WebCrawler {
+public class AutoHomeParseService {
 
     private Gson gson = new Gson();
     private VehicleDao dao;
     private CrawlURLDao crawlURLDao;
-    private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg"
-            + "|png|mp3|mp3|zip|gz))$");
 
-    public MyCrawler() {
-        initDao();
-    }
-
-    public MyCrawler(String test) {
-    }
-    /**
-     * This method receives two parameters. The first parameter is the page
-     * in which we have discovered this new url and the second parameter is
-     * the new url. You should implement this function to specify whether
-     * the given url should be crawled or not (based on your crawling logic).
-     * In this example, we are instructing the crawler to ignore urls that
-     * have css, js, git, ... extensions and to only accept urls that start
-     * with "http://www.ics.uci.edu/". In this case, we didn't need the
-     * referringPage parameter to make the decision.
-     */
-    @Override
-    public boolean shouldVisit(Page referringPage, WebURL url) {
-        String href = url.getURL().toLowerCase();
-        boolean rs = href.startsWith("http://car.autohome.com.cn/config/series/");
-        return rs;
-    }
-
-    /**
-     * This function is called when a page is fetched and ready
-     * to be processed by your program.
-     */
-    @Override
-    public void visit(Page page) {
+    public Vehicle[] parse(Page page) {
+        Vehicle[] vehicles = null;
         String url = page.getWebURL().getURL();
         if(url.lastIndexOf("-") > 0) {
-            return;
+            return null;
         }
         int docId = page.getWebURL().getDocid();
 
@@ -75,7 +42,6 @@ public class MyCrawler extends WebCrawler {
             String text = htmlParseData.getText();
             String html = htmlParseData.getHtml();
 
-            Vehicle[] vehicles;
             // get json
             try {
                 VehicleConfig vehicleConfig = buildVehicleConfig(html);
@@ -133,7 +99,7 @@ public class MyCrawler extends WebCrawler {
                                 v.setGroundClearance(convertValue(value));
                             }else if(itemName.equals("整车质保")) {
                                 v.setWarranty(convertValue(value));
-                            /** 车身 */
+                                /** 车身 */
                             }else if(itemName.equals("长度(mm)")) {
                                 v.setVehicleLong(convertValue(value));
                             }else if(itemName.equals("宽度(mm)")) {
@@ -161,7 +127,7 @@ public class MyCrawler extends WebCrawler {
                             }else if(itemName.equals("行李厢容积(L)")) {
                                 v.setLuggageCapacity(convertValue(value));
 
-                            /**发动机*/
+                                /**发动机*/
                             }else if(itemName.equals("发动机型号")) {
                                 v.setEngineModel(convertValue(value));
                             }else if(itemName.equals("排量(mL)")) {
@@ -206,7 +172,7 @@ public class MyCrawler extends WebCrawler {
                                 v.setIntakeMaterial(convertValue(value));
                             }else if(itemName.equals("环保标准")) {
                                 v.setEnvStandards(convertValue(value));
-                            /** 变速箱 */
+                                /** 变速箱 */
                             }else if(itemName.equals("变速箱简称")) {
                                 v.setGearBoxName(convertValue(value));
                             }else if(itemName.equals("挡位个数")) {
@@ -214,7 +180,7 @@ public class MyCrawler extends WebCrawler {
                             }else if(itemName.equals("变速箱类型")) {
                                 v.setGearBoxType(convertValue(value));
 
-                            /** 底盘转向 */
+                                /** 底盘转向 */
                             }else if(itemName.equals("驱动方式")) {
                                 v.setDriveType(convertValue(value));
                             }else if(itemName.equals("前悬架类型")) {
@@ -226,7 +192,7 @@ public class MyCrawler extends WebCrawler {
                             }else if(itemName.equals("车体结构")) {
                                 v.setBodyStructure(convertValue(value));
 
-                            /** 车轮制动 */
+                                /** 车轮制动 */
                             }else if(itemName.equals("前制动器类型")) {
                                 v.setFrontBreakingType(convertValue(value));
                             }else if(itemName.equals("后制动器类型")) {
@@ -299,7 +265,7 @@ public class MyCrawler extends WebCrawler {
                             } else if(itemName.equals("无钥匙进入系统")) {
                                 v.setNoKeyEntry(convertValue(value));
 
-                            /** 操控配置 */
+                                /** 操控配置 */
                             } else if(itemName.equals("ABS防抱死")) {
                                 v.setABS(convertValue(value));
                             } else if(itemName.equals("制动力分配(EBD/CBC等)")) {
@@ -329,7 +295,7 @@ public class MyCrawler extends WebCrawler {
                             } else if(itemName.equals("后桥限滑差速器/差速锁")) {
                                 v.setBackSpeedLock(convertValue(value));
 
-                            /** 外部配置 */
+                                /** 外部配置 */
                             } else if(itemName.equals("电动天窗")) {
                                 v.setPowerSunroof(convertValue(value));
                             } else if(itemName.equals("全景天窗")) {
@@ -348,7 +314,7 @@ public class MyCrawler extends WebCrawler {
                                 v.setInductionTrunk(convertValue(value));
                             } else if(itemName.equals("车顶行李架")) {
                                 v.setRoofRack(convertValue(value));
-                            /**内部配置*/
+                                /**内部配置*/
                             } else if(itemName.equals("真皮方向盘")) {
                                 v.setLeatherSteeringWheel(convertValue(value));
                             } else if(itemName.equals("方向盘调节")) {
@@ -375,7 +341,7 @@ public class MyCrawler extends WebCrawler {
                                 v.setFullLcdInstrumentPanel(convertValue(value));
                             } else if(itemName.equals("HUD抬头数字显示")) {
                                 v.setHUD(convertValue(value));
-                            /** 座椅配置 */
+                                /** 座椅配置 */
                             } else if(itemName.equals("座椅材质")) {
                                 v.setSeatMaterial(convertValue(value));
                             } else if(itemName.equals("运动风格座椅")) {
@@ -436,7 +402,7 @@ public class MyCrawler extends WebCrawler {
                             } else if(itemName.equals("后排杯架")) {
                                 v.setBackCupHolder(convertValue(value));
 
-                            /** 多媒体配置 */
+                                /** 多媒体配置 */
                             } else if(itemName.equals("GPS导航系统")) {
                                 v.setGps(convertValue(value));
                             } else if(itemName.equals("定位互动服务")) {
@@ -461,7 +427,7 @@ public class MyCrawler extends WebCrawler {
                                 v.setLoudspeakersBrand(convertValue(value));
                             } else if(itemName.equals("扬声器数量")) {
                                 v.setLoudspeakersNum(convertValue(value));
-                            /** 灯光配置 */
+                                /** 灯光配置 */
                             } else if(itemName.equals("近光灯")) {
                                 v.setDippedHeadlight(convertValue(value));
                             } else if(itemName.equals("远光灯")) {
@@ -485,7 +451,7 @@ public class MyCrawler extends WebCrawler {
                             } else if(itemName.equals("车内氛围灯")) {
                                 v.setAmbientLighting(convertValue(value));
 
-                            /** 玻璃/后视镜 */
+                                /** 玻璃/后视镜 */
                             } else if(itemName.equals("前/后电动车窗")) {
                                 v.setPowerWindow(convertValue(value));
                                 String[] rs = splitMultipleValue(value);
@@ -519,7 +485,7 @@ public class MyCrawler extends WebCrawler {
                                 v.setRearWiper(convertValue(value));
                             } else if(itemName.equals("感应雨刷")) {
                                 v.setWiper(convertValue(value));
-                            /** 空调/冰箱 */
+                                /** 空调/冰箱 */
                             } else if(itemName.equals("空调控制方式")) {
                                 v.setAirConditioningControlMode(convertValue(value));
                             } else if(itemName.equals("后排独立空调")) {
@@ -532,7 +498,7 @@ public class MyCrawler extends WebCrawler {
                                 v.setCarAirConditioning(convertValue(value));
                             } else if(itemName.equals("车载冰箱")) {
                                 v.setCarRefrigerator(convertValue(value));
-                            /**高科技配置 */
+                                /**高科技配置 */
                             } else if(itemName.equals("自动泊车入位")) {
                                 v.setAutomaticParking(convertValue(value));
                             } else if(itemName.equals("发动机启停技术")) {
@@ -567,14 +533,16 @@ public class MyCrawler extends WebCrawler {
                     v.setLastModifyDate(new Date());
                     dao.save(v);
                 }
-                Thread.sleep(15000);
+                Thread.sleep(5000);
             } catch(Exception e) {
                 System.out.println("URL: " + url + " no data.");
   /*              e.printStackTrace();*/
-                return;
+                return null;
             }
         }
+        return vehicles;
     }
+
 
     private String convertValue(String value) {
         if("-".equals(value)) {
@@ -636,11 +604,4 @@ public class MyCrawler extends WebCrawler {
         crawlURLDao = (CrawlURLDao) ctx.getBean(CrawlURLDao.SPRING_BEAN_NAME);
     }
 
-    public static void main(String[] args) {
-        MyCrawler crawler = new MyCrawler("test");
-        System.out.println("前●&nbsp;/&nbsp;后●: " + Lists.newArrayList(crawler.splitMultipleValue("前●&nbsp;/&nbsp;后●")));
-        System.out.println("前●&nbsp;/&nbsp;后○: " + Lists.newArrayList(crawler.splitMultipleValue("前●&nbsp;/&nbsp;后○")));
-        System.out.println("前-&nbsp;/&nbsp;后○: " + Lists.newArrayList(crawler.splitMultipleValue("前-&nbsp;/&nbsp;后○")));
-        System.out.println("主●&nbsp;/&nbsp;副●: " +Lists.newArrayList(crawler.splitMultipleValue("主●&nbsp;/&nbsp;副●")));
-    }
 }

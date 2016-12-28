@@ -1,8 +1,9 @@
 package com.coral.crawler.mongoDao;
 
 import com.coral.crawler.mongoModel.Vehicle;
-import com.coral.mongo.MBaseDao;
 import org.springframework.stereotype.Repository;
+
+import com.cccis.base.mongo.MBaseDao;
 
 /**
  * Created by CCC on 2015/11/24.

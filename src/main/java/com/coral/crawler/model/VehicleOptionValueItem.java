@@ -7,6 +7,7 @@ public class VehicleOptionValueItem {
 
     Integer specid;
     String value;
+    String price;
 
     public Integer getSpecid() {
         return specid;
@@ -22,5 +23,13 @@ public class VehicleOptionValueItem {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }
