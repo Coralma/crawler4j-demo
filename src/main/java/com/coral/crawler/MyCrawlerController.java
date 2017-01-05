@@ -12,7 +12,7 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 public class MyCrawlerController {
 
     public static void main(String[] args) throws Exception {
-        String crawlStorageFolder = "D:\\home\\crawl";
+        String crawlStorageFolder = "C:\\home\\crawl";
         int numberOfCrawlers = 1;
 
         CrawlConfig config = new CrawlConfig();

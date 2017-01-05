@@ -567,12 +567,18 @@ public class MyCrawler extends WebCrawler {
                     v.setLastModifyDate(new Date());
                     dao.save(v);
                 }
-                Thread.sleep(15000);
+
             } catch(Exception e) {
                 System.out.println("URL: " + url + " no data.");
   /*              e.printStackTrace();*/
                 return;
             }
+        }
+
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

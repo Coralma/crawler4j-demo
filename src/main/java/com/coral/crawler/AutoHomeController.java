@@ -12,7 +12,7 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 public class AutoHomeController {
 
     public static void main(String[] args) throws Exception {
-        String crawlStorageFolder = "D:\\home\\crawl";
+        String crawlStorageFolder = "C:\\home\\crawl";
         int numberOfCrawlers = 1;
 
         CrawlConfig config = new CrawlConfig();
@@ -23,11 +23,11 @@ public class AutoHomeController {
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
 
-        for(int i=100; i< 500; i++) {
+        for(int i=1; i< 6000; i++) {
             String url = "http://car.autohome.com.cn/config/series/" + i + ".html";
             controller.addSeed(url, i);
             System.out.println(url);
-            Thread.sleep(5000);
+            Thread.sleep(15000);
         }
 
         controller.start(AutoHomeCrawler.class, numberOfCrawlers);
