@@ -1,6 +1,7 @@
 package com.coral.crawler.service;
 
-import java.util.Date;
+import javax.annotation.Resource;
+import java.util.List;
 
 import com.coral.crawler.model.VehicleConfig;
 import com.coral.crawler.model.VehicleConfigItem;
@@ -11,30 +12,78 @@ import com.coral.crawler.model.VehicleOptionItem;
 import com.coral.crawler.model.VehicleOptionTypeItem;
 import com.coral.crawler.model.VehicleOptionValueItem;
 import com.coral.crawler.mongoDao.CrawlURLDao;
+import com.coral.crawler.mongoDao.HistoryURLDao;
 import com.coral.crawler.mongoDao.VehicleDao;
 import com.coral.crawler.mongoModel.CrawlURL;
+import com.coral.crawler.mongoModel.HistoryURL;
 import com.coral.crawler.mongoModel.Vehicle;
 import com.google.gson.Gson;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by CCC on 2016/12/28.
  */
+@Service("AutoHomeParseService")
 public class AutoHomeParseService {
 
     private Gson gson = new Gson();
+
+    @Resource(name = VehicleDao.SPRING_BEAN_NAME)
     private VehicleDao dao;
+
+    @Resource(name = CrawlURLDao.SPRING_BEAN_NAME)
     private CrawlURLDao crawlURLDao;
 
-    public Vehicle[] parse(Page page) {
-        Vehicle[] vehicles = null;
-        String url = page.getWebURL().getURL();
-        if(url.lastIndexOf("-") > 0) {
-            return null;
+    @Resource(name = HistoryURLDao.SPRING_BEAN_NAME)
+    private HistoryURLDao historyURLDao;
+
+    private boolean isHistory = false;
+
+    public AutoHomeParseService() {
+        //initDao();
+    }
+
+    public List<CrawlURL> getNoRunCrawlURLs() {
+        return crawlURLDao.getCrawlURLs();
+    }
+
+    public boolean checkHistoryUrl(String url) {
+        if (url.lastIndexOf("-") > 0) {
+            return true;
         }
+        return false;
+    }
+
+    public boolean checkUrl(String url) {
+        if (url.lastIndexOf("-") > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public void saveVehicle(Vehicle vehicle) {
+        dao.save(vehicle);
+    }
+
+    public boolean checkSameVehicle(String name) {
+        return dao.checkSameVehicle(name);
+    }
+
+    public void saveHistory(HistoryURL historyURL) {
+        historyURLDao.save(historyURL);
+    }
+
+    public void saveCrawlURL(CrawlURL crawlURL) {
+        crawlURLDao.save(crawlURL);
+    }
+
+    public Vehicle[] parse(Page page) throws Exception {
+        Vehicle[] vehicles = new Vehicle[0];
+        String url = page.getWebURL().getURL();
         int docId = page.getWebURL().getDocid();
 
         if (page.getParseData() instanceof HtmlParseData) {
@@ -53,11 +102,11 @@ public class AutoHomeParseService {
                     vehicles[i].setDocId(String.valueOf(docId));
                 }
                 System.out.println("URL: " + url + " , cid: " + String.valueOf(docId));
-                CrawlURL crawlURL = new CrawlURL();
+                /*CrawlURL crawlURL = new CrawlURL();
                 crawlURL.setUrl(url);
                 crawlURL.setCid(String.valueOf(docId));
                 crawlURL.setCreateDate(new Date());
-                crawlURLDao.save(crawlURL);
+                crawlURLDao.save(crawlURL);*/
 
                 for(VehicleConfigItem item : vehicleConfig.getResult().getParamtypeitems()) {
                     for(VehicleConfigParamItem paramItem : item.getParamitems()) {
@@ -527,17 +576,16 @@ public class AutoHomeParseService {
                         }
                     }
                 }
-                // save to dao
+                /*// save to dao
                 for(Vehicle v : vehicles) {
                     v.setCreateDate(new Date());
                     v.setLastModifyDate(new Date());
                     dao.save(v);
                 }
-                Thread.sleep(5000);
+                Thread.sleep(5000);*/
             } catch(Exception e) {
                 System.out.println("URL: " + url + " no data.");
-  /*              e.printStackTrace();*/
-                return null;
+                throw new RuntimeException("no Data");
             }
         }
         return vehicles;
@@ -602,6 +650,7 @@ public class AutoHomeParseService {
         ApplicationContext ctx = new ClassPathXmlApplicationContext(paths);
         dao = (VehicleDao) ctx.getBean(VehicleDao.SPRING_BEAN_NAME);
         crawlURLDao = (CrawlURLDao) ctx.getBean(CrawlURLDao.SPRING_BEAN_NAME);
+        historyURLDao = (HistoryURLDao) ctx.getBean(HistoryURLDao.SPRING_BEAN_NAME);
     }
 
 }
