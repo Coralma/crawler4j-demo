@@ -19,7 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class AutoHomeHistoryController {
 
     public static void main(String[] args) throws Exception {
-        String crawlStorageFolder = "D:\\home\\crawlHistory";
+        String crawlStorageFolder = "C:\\home\\crawlHistory";
         int numberOfCrawlers = 1;
 
         CrawlConfig config = new CrawlConfig();
@@ -33,22 +33,24 @@ public class AutoHomeHistoryController {
         String paths[] = { "META-INF/applicationContext.xml" };
         ApplicationContext ctx = new ClassPathXmlApplicationContext(paths);
         AutoHomeParseService autoHomeParseService = (AutoHomeParseService)ctx.getBean("AutoHomeParseService");
-        List<CrawlURL> crawlURLs = autoHomeParseService.getNoRunCrawlURLs();
+        List<CrawlURL> crawlURLs = autoHomeParseService.getAllCrawlURLs();
+        int index = 9000001;
         for(CrawlURL crawlURL : crawlURLs ) {
             String url = crawlURL.getUrl();
+            System.out.println(url);
             String urlData = url.substring(0, url.lastIndexOf("/"));
-            System.out.println(urlData);
-            for(int i=0; i<10000; i++) {
+            for(int i=100; i<8000; i++) {
                 String hisUrl = urlData + "/" + crawlURL.getCid() + "-" + i + ".html";
                 System.out.println(hisUrl);
-                controller.addSeed(url);
+                controller.addSeed(url, index++);
                 Thread.sleep(Constants.sleepTime);
             }
-            crawlURL.setStatus("2");
-            autoHomeParseService.saveCrawlURL(crawlURL);
+            /*crawlURL.setStatus("2");
+            autoHomeParseService.saveCrawlURL(crawlURL);*/
         }
-        /*String url = "http://car.autohome.com.cn/config/series/364-23571.html";
-        controller.addSeed(url);*/
+        /*controller.addSeed("http://car.autohome.com.cn/config/series/364-100.html", 999001);
+        controller.addSeed("http://car.autohome.com.cn/config/series/364-2357.html", 999002);
+        controller.addSeed("http://car.autohome.com.cn/config/series/364-1589.html", 999003);*/
 
         controller.start(AutoHomeHistoryCrawler.class, numberOfCrawlers);
     }

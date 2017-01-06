@@ -5,5 +5,5 @@ package com.coral.crawler.constant;
  */
 public class Constants {
 
-    public static int sleepTime = 10000;
+    public static int sleepTime = 0;
 }

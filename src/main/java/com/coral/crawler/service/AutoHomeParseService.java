@@ -51,6 +51,10 @@ public class AutoHomeParseService {
         return crawlURLDao.getCrawlURLs();
     }
 
+    public List<CrawlURL> getAllCrawlURLs() {
+        return crawlURLDao.loadAll();
+    }
+
     public boolean checkHistoryUrl(String url) {
         if (url.lastIndexOf("-") > 0) {
             return true;

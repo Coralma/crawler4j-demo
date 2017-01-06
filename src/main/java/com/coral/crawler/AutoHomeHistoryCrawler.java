@@ -39,10 +39,10 @@ public class AutoHomeHistoryCrawler extends WebCrawler {
     public void visit(Page page) {
         try {
             String url = page.getWebURL().getURL();
-            System.out.println("History URL is " + url);
             if(!service.checkHistoryUrl(url)) {
                 return ;
             }
+            System.out.println("History URL is " + url);
             Vehicle[] vehicles = service.parse(page);
             for(Vehicle v : vehicles) {
                 if(!service.checkSameVehicle(v.getName())) {
