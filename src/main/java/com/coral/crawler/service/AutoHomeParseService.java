@@ -13,9 +13,11 @@ import com.coral.crawler.model.VehicleOptionTypeItem;
 import com.coral.crawler.model.VehicleOptionValueItem;
 import com.coral.crawler.mongoDao.CrawlURLDao;
 import com.coral.crawler.mongoDao.HistoryURLDao;
+import com.coral.crawler.mongoDao.SaleURLDao;
 import com.coral.crawler.mongoDao.VehicleDao;
 import com.coral.crawler.mongoModel.CrawlURL;
 import com.coral.crawler.mongoModel.HistoryURL;
+import com.coral.crawler.mongoModel.SaleURL;
 import com.coral.crawler.mongoModel.Vehicle;
 import com.google.gson.Gson;
 import edu.uci.ics.crawler4j.crawler.Page;
@@ -40,6 +42,9 @@ public class AutoHomeParseService {
 
     @Resource(name = HistoryURLDao.SPRING_BEAN_NAME)
     private HistoryURLDao historyURLDao;
+
+    @Resource(name = SaleURLDao.SPRING_BEAN_NAME)
+    private SaleURLDao saleURLDao;
 
     private boolean isHistory = false;
 
@@ -84,6 +89,15 @@ public class AutoHomeParseService {
     public void saveCrawlURL(CrawlURL crawlURL) {
         crawlURLDao.save(crawlURL);
     }
+
+    public void saveSaleURLDao(SaleURL saleURL) {
+        saleURLDao.save(saleURL);
+    }
+
+    public List<SaleURL> getAllSaleURLDao() {
+        return saleURLDao.findAll();
+    }
+
 
     public Vehicle[] parse(Page page) throws Exception {
         Vehicle[] vehicles = new Vehicle[0];
