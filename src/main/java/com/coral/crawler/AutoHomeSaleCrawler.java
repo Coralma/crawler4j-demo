@@ -54,7 +54,7 @@ public class AutoHomeSaleCrawler extends WebCrawler {
     }
 
     public void parseSaleURL(String html, String url, int docId) {
-        System.out.println(html);
+        //System.out.println(html);
         List<String> saleUrls = Lists.newArrayList();
         int dataStartIndex = html.lastIndexOf("<div class=\"salecars\">");
         int dataEndIndex = html.lastIndexOf("<!--end 停售款-->");
@@ -73,6 +73,7 @@ public class AutoHomeSaleCrawler extends WebCrawler {
                 saleURL.setModelUrl("http://car.autohome.com.cn/config/series/" + cid + ".html");
                 saleURL.setCid(cid);
                 service.saveSaleURLDao(saleURL);
+                System.out.println(saleURL.getModelUrl());
             }
         }
     }

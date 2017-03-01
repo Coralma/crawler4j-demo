@@ -19,7 +19,7 @@ public class AutoHomeSaleController {
 
 
     public static void main(String[] args) throws Exception {
-        String crawlStorageFolder = "D:\\home\\crawlSale";
+        String crawlStorageFolder = "C:\\home\\crawlSale";
         int numberOfCrawlers = 1;
 
         CrawlConfig config = new CrawlConfig();
