@@ -36,7 +36,7 @@ public class AutoHomeHistoryController {
         int index = 9000001;
         for(SaleURL saleURL : saleURLs) {
             String url = saleURL.getModelUrl();
-            System.out.println("Model URL: " + url);
+            System.out.println("Exec url: " + url);
             controller.addSeed(url, index++);
         }
         /*controller.addSeed("http://car.autohome.com.cn/config/series/364-100.html", 999001);

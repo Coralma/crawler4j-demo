@@ -3,7 +3,6 @@ package com.coral.crawler;
 import java.util.Date;
 
 import com.coral.crawler.constant.Constants;
-import com.coral.crawler.mongoModel.HistoryURL;
 import com.coral.crawler.mongoModel.Vehicle;
 import com.coral.crawler.service.AutoHomeParseService;
 import edu.uci.ics.crawler4j.crawler.Page;
@@ -51,7 +50,7 @@ public class AutoHomeHistoryCrawler extends WebCrawler {
                     service.saveVehicle(v);
                 }
             }
-            // if the vehicle is correct
+            /*// if the vehicle is correct
             if(vehicles.length > 0 && service.checkHistoryUrl(url)) {
                 HistoryURL historyURL = new HistoryURL();
                 historyURL.setUrl(url);
@@ -59,7 +58,7 @@ public class AutoHomeHistoryCrawler extends WebCrawler {
                 historyURL.setCid(String.valueOf(cid));
                 historyURL.setCreateDate(new Date());
                 service.saveHistory(historyURL);
-            }
+            }*/
         }catch (Exception e) {
             return;
         }
