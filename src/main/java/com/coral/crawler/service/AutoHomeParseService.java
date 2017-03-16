@@ -148,7 +148,7 @@ public class AutoHomeParseService {
                                 v.setGearBox(convertValue(value));
                             }else if(itemName.equals("长*宽*高(mm)")) {
                                 v.setSize(convertValue(value));
-                            }else if(itemName.equals("车身结构")) {
+                            }else if(i<10 && itemName.equals("车身结构")) {
                                 v.setStructure(convertValue(value));
                             }else if(itemName.equals("最高车速(km/h)")) {
                                 v.setSpeed(convertValue(value));
@@ -240,7 +240,7 @@ public class AutoHomeParseService {
                             }else if(itemName.equals("环保标准")) {
                                 v.setEnvStandards(convertValue(value));
                                 /** 变速箱 */
-                            }else if(itemName.equals("变速箱简称")) {
+                            }else if(itemName.equals("简称")) {
                                 v.setGearBoxName(convertValue(value));
                             }else if(itemName.equals("挡位个数")) {
                                 v.setGearNum(convertValue(value));
@@ -269,7 +269,7 @@ public class AutoHomeParseService {
                             }else if(itemName.equals("前轮胎规格")) {
                                 v.setFrontTyreType(convertValue(value));
                             }else if(itemName.equals("后轮胎规格")) {
-                                v.setBackBreakingType(convertValue(value));
+                                v.setBackTyreType(convertValue(value));
                             }else if(itemName.equals("备胎规格")) {
                                 v.setSpareTireType(convertValue(value));
                             }
