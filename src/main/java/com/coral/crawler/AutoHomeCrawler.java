@@ -3,6 +3,7 @@ package com.coral.crawler;
 import java.util.Date;
 
 import com.coral.crawler.constant.Constants;
+import com.coral.crawler.mongoModel.CrawlURL;
 import com.coral.crawler.mongoModel.Vehicle;
 import com.coral.crawler.service.AutoHomeParseService;
 import edu.uci.ics.crawler4j.crawler.Page;
@@ -23,7 +24,7 @@ public class AutoHomeCrawler extends WebCrawler {
         //这个xml文件是Spring配置beans的文件，顺带一提，路径 在整个应用的根目录
         ApplicationContext ctx = new ClassPathXmlApplicationContext(paths);
         service = (AutoHomeParseService) ctx.getBean("AutoHomeParseService");
-        System.out.println("Init AutoHomeHistoryCrawler done.");
+        System.out.println("Init AutoHomeCrawler done.");
     }
 
     @Override
@@ -37,12 +38,27 @@ public class AutoHomeCrawler extends WebCrawler {
     @Override
     public void visit(Page page) {
         try {
+            Thread.sleep(Constants.getRandomSleepTime(20000));
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
             String url = page.getWebURL().getURL();
-            if (!service.checkHistoryUrl(url)) {
+            if (!service.checkUrl(url)) {
                 return;
             }
-            System.out.println("History URL is " + url);
+            System.out.println("Main URL is " + url);
+
             Vehicle[] vehicles = service.parse(page);
+            // save the crawl url
+            int docId = page.getWebURL().getDocid();
+            CrawlURL crawlURL = new CrawlURL();
+            crawlURL.setUrl(url);
+            crawlURL.setCid(String.valueOf(docId));
+            crawlURL.setCreateDate(new Date());
+            service.saveCrawlURL(crawlURL);
+            // save the vehicle
             for (Vehicle v : vehicles) {
                 if (!service.checkSameVehicle(v.getName())) {
                     v.setCreateDate(new Date());
@@ -62,13 +78,6 @@ public class AutoHomeCrawler extends WebCrawler {
         }
         catch (Exception e) {
             return;
-        }
-
-        try {
-            Thread.sleep(Constants.getRandomSleepTime(10000));
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 }

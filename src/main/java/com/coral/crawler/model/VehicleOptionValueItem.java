@@ -7,7 +7,7 @@ public class VehicleOptionValueItem {
 
     Integer specid;
     String value;
-    String price;
+    VehicleOptionPriceItem[] price;
 
     public Integer getSpecid() {
         return specid;
@@ -25,11 +25,11 @@ public class VehicleOptionValueItem {
         this.value = value;
     }
 
-    public String getPrice() {
+    public VehicleOptionPriceItem[] getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(VehicleOptionPriceItem[] price) {
         this.price = price;
     }
 }

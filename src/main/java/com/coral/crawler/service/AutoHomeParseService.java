@@ -602,6 +602,7 @@ public class AutoHomeParseService {
                 }
                 Thread.sleep(5000);*/
             } catch(Exception e) {
+                e.printStackTrace();
                 System.out.println("URL: " + url + " no data.");
                 throw new RuntimeException("no Data");
             }
