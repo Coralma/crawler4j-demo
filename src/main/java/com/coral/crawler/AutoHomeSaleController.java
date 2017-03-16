@@ -2,6 +2,7 @@ package com.coral.crawler;
 
 import java.util.List;
 
+import com.coral.crawler.constant.Constants;
 import com.coral.crawler.mongoModel.CrawlURL;
 import com.coral.crawler.service.AutoHomeParseService;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
@@ -19,7 +20,7 @@ public class AutoHomeSaleController {
 
 
     public static void main(String[] args) throws Exception {
-        String crawlStorageFolder = "D:\\home\\crawlSale";
+        String crawlStorageFolder = "C:\\home\\crawlSale";
         int numberOfCrawlers = 1;
 
         CrawlConfig config = new CrawlConfig();
@@ -39,6 +40,7 @@ public class AutoHomeSaleController {
             String saleURL = "http://www.autohome.com.cn/"+ cid +"/sale.html";
             System.out.println(saleURL);
             controller.addSeed(saleURL, cid);
+            Thread.sleep(Constants.sleepTime);
         }
         /*String url = "http://www.autohome.com.cn/135/sale.html";
         controller.addSeed(url, 135);*/

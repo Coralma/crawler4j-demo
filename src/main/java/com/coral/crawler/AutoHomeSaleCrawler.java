@@ -25,7 +25,7 @@ public class AutoHomeSaleCrawler extends WebCrawler {
         //这个xml文件是Spring配置beans的文件，顺带一提，路径 在整个应用的根目录
         ApplicationContext ctx = new ClassPathXmlApplicationContext(paths);
         service = (AutoHomeParseService) ctx.getBean("AutoHomeParseService");
-        System.out.println("Init AutoHomeHistoryCrawler done.");
+        System.out.println("Init AutoHomeSaleCrawler done.");
     }
 
     @Override
@@ -35,26 +35,29 @@ public class AutoHomeSaleCrawler extends WebCrawler {
 
     @Override
     public void visit(Page page) {
-        String url = page.getWebURL().getURL();
-        int docId = page.getWebURL().getDocid();
-        System.out.println("Sale URL is " + url);
-        if (page.getParseData() instanceof HtmlParseData) {
-            HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
-            String text = htmlParseData.getText();
-            String html = htmlParseData.getHtml();
-            parseSaleURL(html, url, docId);
-        }
-
         try {
-            Thread.sleep(Constants.sleepTime);
+            Thread.sleep(Constants.getRandomSleepTime(40000));
         }
         catch (InterruptedException e) {
             e.printStackTrace();
         }
+        try {
+            String url = page.getWebURL().getURL();
+            int docId = page.getWebURL().getDocid();
+            System.out.println("Sale URL is " + url);
+            if (page.getParseData() instanceof HtmlParseData) {
+                HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
+                String text = htmlParseData.getText();
+                String html = htmlParseData.getHtml();
+                parseSaleURL(html, url, docId);
+            }
+        } catch (Exception e) {
+           return;
+        }
     }
 
     public void parseSaleURL(String html, String url, int docId) {
-        System.out.println(html);
+        //System.out.println(html);
         List<String> saleUrls = Lists.newArrayList();
         int dataStartIndex = html.lastIndexOf("<div class=\"salecars\">");
         int dataEndIndex = html.lastIndexOf("<!--end 停售款-->");
@@ -73,6 +76,7 @@ public class AutoHomeSaleCrawler extends WebCrawler {
                 saleURL.setModelUrl("http://car.autohome.com.cn/config/series/" + cid + ".html");
                 saleURL.setCid(cid);
                 service.saveSaleURLDao(saleURL);
+                System.out.println(saleURL.getModelUrl());
             }
         }
     }

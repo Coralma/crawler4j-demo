@@ -2,6 +2,7 @@ package com.coral.crawler;
 
 import java.util.List;
 
+import com.coral.crawler.constant.Constants;
 import com.coral.crawler.mongoModel.SaleURL;
 import com.coral.crawler.service.AutoHomeParseService;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
@@ -38,6 +39,7 @@ public class AutoHomeHistoryController {
             String url = saleURL.getModelUrl();
             System.out.println("Exec url: " + url);
             controller.addSeed(url, index++);
+            Thread.sleep(Constants.sleepTime);
         }
         /*controller.addSeed("http://car.autohome.com.cn/config/series/364-100.html", 999001);
         controller.addSeed("http://car.autohome.com.cn/config/series/364-2357.html", 999002);

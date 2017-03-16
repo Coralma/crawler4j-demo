@@ -7,14 +7,14 @@ import java.util.Random;
  */
 public class Constants {
 
-    public static int sleepTime = 0;
+    public static int sleepTime = 500;
     private static Random random = new Random();
 
     public static int getRandomSleepTime(Integer scope) {
         int max=scope;
-        int min=1000;
+        int min=5000;
         if(max < min) {
-            throw new RuntimeException("The max scope have to bigger than 1000.");
+            throw new RuntimeException("The max scope have to bigger than 5000.");
         }
         return random.nextInt(max)%(max-min+1) + min;
     }

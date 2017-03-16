@@ -43,7 +43,7 @@ public class MyCrawlerController {
             String url = "http://car.autohome.com.cn/config/series/" + i + ".html";
             controller.addSeed(url, i);
             System.out.println(url);
-            Thread.sleep(15000);
+           // Thread.sleep(15000);
         }
 
         /*
