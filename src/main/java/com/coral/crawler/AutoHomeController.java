@@ -30,7 +30,7 @@ public class AutoHomeController {
             System.out.println(url);
             Thread.sleep(Constants.sleepTime);
         }
-        //controller.addSeed("http://car.autohome.com.cn/config/series/18.html", 18);
+        /*controller.addSeed("http://car.autohome.com.cn/config/series/18.html", 18);*/
 
         controller.start(AutoHomeCrawler.class, numberOfCrawlers);
     }

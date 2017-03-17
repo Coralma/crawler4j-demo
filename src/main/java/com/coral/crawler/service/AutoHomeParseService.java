@@ -127,6 +127,7 @@ public class AutoHomeParseService {
                 crawlURLDao.save(crawlURL);*/
 
                 for(VehicleConfigItem item : vehicleConfig.getResult().getParamtypeitems()) {
+                    String categoryName = item.getName();
                     for(VehicleConfigParamItem paramItem : item.getParamitems()) {
                         String itemName = paramItem.getName();
                         VehicleConfigValueItem[] valueItems = paramItem.getValueitems();
@@ -148,7 +149,7 @@ public class AutoHomeParseService {
                                 v.setGearBox(convertValue(value));
                             }else if(itemName.equals("长*宽*高(mm)")) {
                                 v.setSize(convertValue(value));
-                            }else if(i<10 && itemName.equals("车身结构")) {
+                            }else if(categoryName.equals("基本参数") && itemName.equals("车身结构")) {
                                 v.setStructure(convertValue(value));
                             }else if(itemName.equals("最高车速(km/h)")) {
                                 v.setSpeed(convertValue(value));
@@ -221,7 +222,7 @@ public class AutoHomeParseService {
                                 v.setMaxPower(convertValue(value));
                             }else if(itemName.equals("最大功率转速(rpm)")) {
                                 v.setMaxPowerRpm(convertValue(value));
-                            }else if(itemName.equals("最大扭矩(N·m)")) {
+                            }else if(itemName.startsWith("最大扭矩(")) {
                                 v.setMaxNm(convertValue(value));
                             }else if(itemName.equals("最大扭矩转速(rpm)")) {
                                 v.setMaxRpm(convertValue(value));
@@ -400,6 +401,11 @@ public class AutoHomeParseService {
                                 v.setCruise(convertValue(value));
                             } else if(itemName.equals("前/后驻车雷达")) {
                                 v.setParkingRadar(convertValue(value));
+                                String[] rs = splitMultipleValue(value);
+                                if(rs.length == 2) {
+                                    v.setFrontParkingRadar(rs[0]);
+                                    v.setBackParkingRadar(rs[1]);
+                                }
                             } else if(itemName.equals("倒车视频影像")) {
                                 v.setReverseVideoImage(convertValue(value));
                             } else if(itemName.equals("行车电脑显示屏")) {
@@ -536,6 +542,11 @@ public class AutoHomeParseService {
                                 v.setRearviewMirrorHeating(convertValue(value));
                             } else if(itemName.equals("内/外后视镜自动防眩目")) {
                                 v.setAntiGlareRearviewMirror(convertValue(value));
+                                String[] rs = splitMultipleValue(value);
+                                if(rs.length == 2) {
+                                    v.setInnerAntiGlareRearviewMirror(rs[0]);
+                                    v.setOuterAntiGlareRearviewMirror(rs[1]);
+                                }
                             } else if(itemName.equals("后视镜电动折叠")) {
                                 v.setRearviewMirrorElectricFolding(convertValue(value));
                             } else if(itemName.equals("后视镜记忆")) {
@@ -555,6 +566,19 @@ public class AutoHomeParseService {
                                 /** 空调/冰箱 */
                             } else if(itemName.equals("空调控制方式")) {
                                 v.setAirConditioningControlMode(convertValue(value));
+                                String[] rs = splitMultipleValue(value);
+                                if(rs.length == 2) {
+                                    v.setmTAirConditioningControlMode(rs[0]);
+                                    v.setaTAirConditioningControlMode(rs[1]);
+                                } else if(rs.length ==0){
+                                    if(value.startsWith("自动")) {
+                                        v.setaTAirConditioningControlMode(convertValue(value.substring(2)));
+                                        v.setmTAirConditioningControlMode("无");
+                                    } else if(value.startsWith("手动")) {
+                                        v.setmTAirConditioningControlMode(convertValue(value.substring(2)));
+                                        v.setaTAirConditioningControlMode("无");
+                                    }
+                                }
                             } else if(itemName.equals("后排独立空调")) {
                                 v.setRearIndependentAirConditioning(convertValue(value));
                             } else if(itemName.equals("后座出风口")) {

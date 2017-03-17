@@ -385,6 +385,8 @@ public class Vehicle extends MBaseEntity {
     private String rearviewMirrorHeating;
     //内/外后视镜自动防眩目
     private String antiGlareRearviewMirror;
+    private String innerAntiGlareRearviewMirror;
+    private String outerAntiGlareRearviewMirror;
     //后视镜电动折叠
     private String rearviewMirrorElectricFolding;
     //后视镜记忆
@@ -405,6 +407,8 @@ public class Vehicle extends MBaseEntity {
     /** 空调/冰箱 */
     //空调控制方式
     private String airConditioningControlMode;
+    private String mTAirConditioningControlMode;
+    private String aTAirConditioningControlMode;
     //后排独立空调
     private String rearIndependentAirConditioning;
     //后座出风口
@@ -2105,5 +2109,37 @@ public class Vehicle extends MBaseEntity {
 
     public void setBackPowerWindow(String backPowerWindow) {
         this.backPowerWindow = backPowerWindow;
+    }
+
+    public String getmTAirConditioningControlMode() {
+        return mTAirConditioningControlMode;
+    }
+
+    public void setmTAirConditioningControlMode(String mTAirConditioningControlMode) {
+        this.mTAirConditioningControlMode = mTAirConditioningControlMode;
+    }
+
+    public String getaTAirConditioningControlMode() {
+        return aTAirConditioningControlMode;
+    }
+
+    public void setaTAirConditioningControlMode(String aTAirConditioningControlMode) {
+        this.aTAirConditioningControlMode = aTAirConditioningControlMode;
+    }
+
+    public String getInnerAntiGlareRearviewMirror() {
+        return innerAntiGlareRearviewMirror;
+    }
+
+    public void setInnerAntiGlareRearviewMirror(String innerAntiGlareRearviewMirror) {
+        this.innerAntiGlareRearviewMirror = innerAntiGlareRearviewMirror;
+    }
+
+    public String getOuterAntiGlareRearviewMirror() {
+        return outerAntiGlareRearviewMirror;
+    }
+
+    public void setOuterAntiGlareRearviewMirror(String outerAntiGlareRearviewMirror) {
+        this.outerAntiGlareRearviewMirror = outerAntiGlareRearviewMirror;
     }
 }

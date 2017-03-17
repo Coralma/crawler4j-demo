@@ -2,7 +2,6 @@ package com.coral.crawler;
 
 import java.util.Date;
 
-import com.coral.crawler.constant.Constants;
 import com.coral.crawler.mongoModel.CrawlURL;
 import com.coral.crawler.mongoModel.Vehicle;
 import com.coral.crawler.service.AutoHomeParseService;
@@ -37,12 +36,12 @@ public class AutoHomeCrawler extends WebCrawler {
 
     @Override
     public void visit(Page page) {
-        try {
+        /*try {
             Thread.sleep(Constants.getRandomSleepTime(20000));
         }
         catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         try {
             String url = page.getWebURL().getURL();
             if (!service.checkUrl(url)) {
