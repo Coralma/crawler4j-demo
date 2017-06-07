@@ -129,7 +129,7 @@ public class AutoHomeParseService {
                 for(VehicleConfigItem item : vehicleConfig.getResult().getParamtypeitems()) {
                     String categoryName = item.getName();
                     for(VehicleConfigParamItem paramItem : item.getParamitems()) {
-                        String itemName = paramItem.getName();
+                        String itemName = convertName(paramItem.getName());
                         VehicleConfigValueItem[] valueItems = paramItem.getValueitems();
                         for(int i=0; i < valueItems.length;i++) {
                             Vehicle v = vehicles[i];
@@ -634,8 +634,19 @@ public class AutoHomeParseService {
         return vehicles;
     }
 
+    private String convertName(String name) {
+        if("<span class='hs_kw0_configpl'></span><span class='hs_kw1_configpl'></span>".equals(name)) {
+            return "车型名称";
+        }
+        if("厂<span class='hs_kw7_configpl'></span><span class='hs_kw8_configpl'></span><span class='hs_kw9_configpl'></span><span class='hs_kw10_configpl'></span>(<span class='hs_kw11_configpl'></span>".equals(name)) {
+            return "厂商指导价(元)";
+        }
+        name.replaceAll("<span class='hs_kw7_configpl'></span>","商");
+        return name;
+    }
 
     private String convertValue(String value) {
+        value = cleanSpan(replayValue(value));
         if("-".equals(value)) {
             return "无";
         }
@@ -646,6 +657,25 @@ public class AutoHomeParseService {
             return "选配";
         }
         return value;
+    }
+
+    private String replayValue(String value) {
+        value = value.replaceAll("<span class='hs_kw22_configpl'></span>","年或");
+        value = value.replaceAll("<span class='hs_kw12_configpl'></span>","万");
+        return value;
+    }
+
+    private String cleanSpan(String value) {
+        int spanStar = value.indexOf("<span");
+        if(spanStar < 0) {
+            return value;
+        } else {
+            String head = value.substring(0, spanStar);
+            int spanEnd = value.indexOf("</span>") + 7; // 7 is the length of </span> string
+            String other = value.substring(spanEnd);
+            value = head + other;
+            return cleanSpan(value);
+        }
     }
 
     public String[] splitMultipleValue(String value) {
