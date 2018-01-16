@@ -40,30 +40,33 @@ public class PcAutoService {
     private HistoryURLDao historyURLDao;
 
     public void currentVehicle(String url,String html,Integer docId) {
-        // save to dao
-        CrawlURL crawlURL = new CrawlURL();
-        crawlURL.setUrl(url);
-        crawlURL.setCid(String.valueOf(docId));
-        crawlURL.setCreateDate(new Date());
-        crawlURLDao.save(crawlURL);
-
         Vehicle[] vehicles = parse(url,html,docId);
-        for(Vehicle v : vehicles) {
-            v.setCreateDate(new Date());
-            v.setLastModifyDate(new Date());
-            dao.save(v);
+        if(vehicles != null) {
+            for (Vehicle v : vehicles) {
+                v.setCreateDate(new Date());
+                v.setLastModifyDate(new Date());
+                dao.save(v);
+            }
+            // save to dao
+            CrawlURL crawlURL = new CrawlURL();
+            crawlURL.setUrl(url);
+            crawlURL.setCid(String.valueOf(docId));
+            crawlURL.setCreateDate(new Date());
+            crawlURLDao.save(crawlURL);
+            // save history
+            saveHistoryURL(html, docId);
         }
-        // save history
-        saveHistoryURL(html, docId);
     }
 
     public void historyVehicle(String url,String html,Integer docId) {
         // save to dao
         Vehicle[] vehicles = parse(url,html,docId);
-        for(Vehicle v : vehicles) {
-            v.setCreateDate(new Date());
-            v.setLastModifyDate(new Date());
-            dao.save(v);
+        if(vehicles != null) {
+            for (Vehicle v : vehicles) {
+                v.setCreateDate(new Date());
+                v.setLastModifyDate(new Date());
+                dao.save(v);
+            }
         }
     }
 
