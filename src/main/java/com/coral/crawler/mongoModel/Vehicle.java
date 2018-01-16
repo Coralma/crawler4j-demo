@@ -25,6 +25,8 @@ public class Vehicle extends MBaseEntity {
     private String manufacturer;
     //级别
     private String level;
+    // 上市时间（New）
+    private String marketTime;
     //发动机
     private String engine;
     //变速箱
@@ -2141,5 +2143,13 @@ public class Vehicle extends MBaseEntity {
 
     public void setOuterAntiGlareRearviewMirror(String outerAntiGlareRearviewMirror) {
         this.outerAntiGlareRearviewMirror = outerAntiGlareRearviewMirror;
+    }
+
+    public String getMarketTime() {
+        return marketTime;
+    }
+
+    public void setMarketTime(String marketTime) {
+        this.marketTime = marketTime;
     }
 }

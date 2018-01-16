@@ -1,6 +1,5 @@
-package com.coral.crawler;
+package com.coral.crawler.controller;
 
-import com.coral.crawler.constant.Constants;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
 import edu.uci.ics.crawler4j.fetcher.PageFetcher;
@@ -8,9 +7,9 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 /**
- * Created by CCC on 2016/12/28.
+ * Created by CCC on 2015/11/19.
  */
-public class AutoHomeController {
+public class PcAutoController {
 
     public static void main(String[] args) throws Exception {
         String crawlStorageFolder = "C:\\home\\crawl";
@@ -19,19 +18,31 @@ public class AutoHomeController {
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
 
+        /*
+         * Instantiate the controller for this crawl.
+         */
         PageFetcher pageFetcher = new PageFetcher(config);
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
 
-        /*for(int i=1; i< 60; i++) {
-            String url = "http://car.autohome.com.cn/config/series/" + i + ".html";
+/*
+        int totalIndex = 6000;
+        for(int i=1; i< totalIndex; i++) {
+            String url = "http://price.pcauto.com.cn/sg" + i + "/config.html";
             controller.addSeed(url, i);
             System.out.println(url);
-            Thread.sleep(Constants.sleepTime);
-        }*/
-        controller.addSeed("https://car.autohome.com.cn/config/series/834.html", 834);
+        }
+*/
 
-        controller.start(AutoHomeCrawler.class, numberOfCrawlers);
+        String url = "http://price.pcauto.com.cn/sg1726/config.html";
+        controller.addSeed(url, 1726);
+
+        /*
+         * Start the crawl. This is a blocking operation, meaning that your code
+         * will reach the line after this only when crawling is finished.
+         */
+        controller.start(PcAutoCrawler.class, numberOfCrawlers);
     }
+
 }
