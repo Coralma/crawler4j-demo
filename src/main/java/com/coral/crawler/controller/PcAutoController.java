@@ -30,6 +30,7 @@ public class PcAutoController {
         for(int i=1; i< totalIndex; i++) {
             String url = "http://price.pcauto.com.cn/sg" + i + "/config.html";
             controller.addSeed(url, i);
+            System.out.println("init Url: " + url);
         }
 
 /*        String url = "http://price.pcauto.com.cn/sg1726/config.html";
