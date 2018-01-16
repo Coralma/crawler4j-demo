@@ -1,5 +1,6 @@
 package com.coral.crawler.controller;
 
+import com.coral.crawler.constant.Constants;
 import com.coral.crawler.model.*;
 import com.coral.crawler.model.pcauto.PcAutoConfig;
 import com.coral.crawler.model.pcauto.PcAutoItem;
@@ -72,11 +73,11 @@ public class PcAutoCrawler extends WebCrawler {
             service.currentVehicle(url,html,docId);
         }
 
-        /*try {
-            Thread.sleep(15000);
+        try {
+            Thread.sleep(Constants.getRandomSleepTime(20000));
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     private void initDao() {

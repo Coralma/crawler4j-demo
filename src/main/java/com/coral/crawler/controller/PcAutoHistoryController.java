@@ -19,7 +19,7 @@ public class PcAutoHistoryController {
 
 
     public static void main(String[] args) throws Exception {
-        String crawlStorageFolder = "C:\\home\\historyCrawl";
+        String crawlStorageFolder = "C:\\home\\PcAutoHistoryCrawl";
         int numberOfCrawlers = 1;
 
         CrawlConfig config = new CrawlConfig();
