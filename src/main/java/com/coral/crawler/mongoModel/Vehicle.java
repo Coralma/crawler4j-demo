@@ -14,439 +14,439 @@ public class Vehicle extends MBaseEntity {
     @Id
     private String vid;
 
-    private String docId;
+    private String docId = "null";
 
     /** 基本参数 */
     //车型名称
-    private String name;
+    private String name= "null";
     //厂商指导价(元)
-    private String price;
+    private String price= "null";
     //厂商
-    private String manufacturer;
+    private String manufacturer= "null";
     //级别
-    private String level;
+    private String level= "null";
     // 上市时间（New）
-    private String marketTime;
+    private String marketTime= "null";
     //发动机
-    private String engine;
+    private String engine= "null";
     //变速箱
-    private String gearBox;
+    private String gearBox= "null";
     //长*宽*高(mm)
-    private String size;
+    private String size= "null";
     //车身结构
-    private String structure;
+    private String structure= "null";
     //最高车速(km/h)
-    private String speed;
+    private String speed= "null";
     //官方0-100km/h加速(s)
-    private String speedUp;
+    private String speedUp= "null";
     //实测0-100km/h加速(s)
-    private String testedSpeedUp;
+    private String testedSpeedUp= "null";
     //实测100-0km/h制动(m)
-    private String testedBraking;
+    private String testedBraking= "null";
     //实测油耗(L/100km)
-    private String testedFuelConsumption;
+    private String testedFuelConsumption= "null";
     //工信部综合油耗(L/100km)
-    private String officalFuelConsumption;
+    private String officalFuelConsumption= "null";
     //实测离地间隙(mm)
-    private String groundClearance;
+    private String groundClearance= "null";
     //整车质保
-    private String warranty;
+    private String warranty= "null";
 
 
     /**车身*/
     //长度(mm)
-    private String vehicleLong;
+    private String vehicleLong= "null";
     //宽度(mm)
-    private String vehicleWidth;
+    private String vehicleWidth= "null";
     //高度(mm)
-    private String vehicleTall;
+    private String vehicleTall= "null";
     //轴距(mm)
-    private String wheelBase;
+    private String wheelBase= "null";
     //前轮距(mm)
-    private String frontTread;
+    private String frontTread= "null";
     //后轮距(mm)
-    private String backTread;
+    private String backTread= "null";
     //最小离地间隙(mm)
-    private String minGroundClearance;
+    private String minGroundClearance= "null";
     //整备质量(kg)
-    private String quality;
+    private String quality= "null";
     //车身结构
-    private String vehicleStyle;
+    private String vehicleStyle= "null";
     //车门数(个)
-    private String doorNum;
+    private String doorNum= "null";
     //座位数(个)
-    private String seatNum;
+    private String seatNum= "null";
     //油箱容积(L)
-    private String tankCapacity;
+    private String tankCapacity= "null";
     //行李厢容积(L)
-    private String luggageCapacity;
+    private String luggageCapacity= "null";
 
     /**发动机*/
     //发动机型号
-    private String engineModel;
+    private String engineModel= "null";
     //排量(mL)
-    private String displacement;
+    private String displacement= "null";
     //进气形式
-    private String intakeForm;
+    private String intakeForm= "null";
     //气缸排列形式
-    private String intakeType;
+    private String intakeType= "null";
     //气缸数(个)
-    private String intakeNum;
+    private String intakeNum= "null";
     //每缸气门数(个)
-    private String eachIntakeNum;
+    private String eachIntakeNum= "null";
     //压缩比
-    private String zipRate;
+    private String zipRate= "null";
     //配气机构
-    private String intakeStructure;
+    private String intakeStructure= "null";
     //缸径(mm)
-    private String intakeDiameter;
+    private String intakeDiameter= "null";
     //行程(mm)
-    private String route;
+    private String route= "null";
     //最大马力(Ps)
-    private String maxHorsepower;
+    private String maxHorsepower= "null";
     //最大功率(kW)
-    private String maxPower;
+    private String maxPower= "null";
     //最大功率转速(rpm)
-    private String maxPowerRpm;
+    private String maxPowerRpm= "null";
     //最大扭矩(N·m)
-    private String maxNm;
+    private String maxNm= "null";
     //最大扭矩转速(rpm)
-    private String maxRpm;
+    private String maxRpm= "null";
     //发动机特有技术
-    private String engineTechnology;
+    private String engineTechnology= "null";
     //燃料形式
-    private String fuelForm;
+    private String fuelForm= "null";
     //燃油标号
-    private String fuelNo;
+    private String fuelNo= "null";
     //供油方式
-    private String fuelFeedingType;
+    private String fuelFeedingType= "null";
     //缸盖材料
-    private String intakeLidMaterial;
+    private String intakeLidMaterial= "null";
     //缸体材料
-    private String intakeMaterial;
+    private String intakeMaterial= "null";
     //环保标准
-    private String envStandards;
+    private String envStandards= "null";
 
     /**变速箱*/
     //变速箱简称
-    private String gearBoxName;
+    private String gearBoxName= "null";
     //挡位个数
-    private String gearNum;
+    private String gearNum= "null";
     //变速箱类型
-    private String gearBoxType;
+    private String gearBoxType= "null";
 
     /** 底盘转向 */
     //驱动方式
-    private String driveType;
+    private String driveType= "null";
     //前悬架类型
-    private String frontHangerType;
+    private String frontHangerType= "null";
     //后悬架类型
-    private String backHangerType;
+    private String backHangerType= "null";
     //助力类型
-    private String assistanceType;
+    private String assistanceType= "null";
     //车体结构
-    private String bodyStructure;
+    private String bodyStructure= "null";
 
     /** 车轮制动 */
     //前制动器类型
-    private String frontBreakingType;
+    private String frontBreakingType= "null";
     //后制动器类型
-    private String backBreakingType;
+    private String backBreakingType= "null";
     //驻车制动类型
-    private String stopBreakingType;
+    private String stopBreakingType= "null";
     //前轮胎规格
-    private String frontTyreType;
+    private String frontTyreType= "null";
     //后轮胎规格
-    private String backTyreType;
+    private String backTyreType= "null";
     //备胎规格
-    private String spareTireType;
+    private String spareTireType= "null";
 
 
     /** 安全装备 */
     //主/副驾驶座安全气囊
-    private String airBag;
-    private String mainAirBag;
-    private String copilotAirBag;
+    private String airBag= "null";
+    private String mainAirBag= "null";
+    private String copilotAirBag= "null";
     //前/后排侧气囊
-    private String frontBackAirBag;
-    private String frontAirBag;
-    private String backAirBag;
+    private String frontBackAirBag= "null";
+    private String frontAirBag= "null";
+    private String backAirBag= "null";
     //前/后排头部气囊(气帘)
-    private String frontBackGasCurtain;
-    private String frontGasCurtain;
-    private String backGasCurtain;
+    private String frontBackGasCurtain= "null";
+    private String frontGasCurtain= "null";
+    private String backGasCurtain= "null";
     //膝部气囊
-    private String kneeAirBag;
+    private String kneeAirBag= "null";
     //胎压监测装置
-    private String tirePressureMonitoring;
+    private String tirePressureMonitoring= "null";
     //零胎压继续行驶
-    private String zeroTirePressureDrive;
+    private String zeroTirePressureDrive= "null";
     //安全带未系提示
-    private String safetyBeltAlert;
+    private String safetyBeltAlert= "null";
     //ISOFIX儿童座椅接口
-    private String isofix;
+    private String isofix= "null";
     //发动机电子防盗
-    private String engineAgainstTheft;
+    private String engineAgainstTheft= "null";
     //车内中控锁
-    private String carLock;
+    private String carLock= "null";
     //遥控钥匙
-    private String remoteKey;
+    private String remoteKey= "null";
     //无钥匙启动系统
-    private String noKeyStart;
+    private String noKeyStart= "null";
     //无钥匙进入系统
-    private String noKeyEntry;
+    private String noKeyEntry= "null";
 
     /** 操控配置 */
     //ABS防抱死
-    private String ABS;
+    private String ABS= "null";
     //制动力分配(EBD/CBC等)
-    private String EBD;
+    private String EBD= "null";
     //刹车辅助(EBA/BAS/BA等)
-    private String EBA;
+    private String EBA= "null";
     //牵引力控制(ASR/TCS/TRC等)
-    private String ASR;
+    private String ASR= "null";
     //车身稳定控制(ESC/ESP/DSC等)
-    private String ESC;
+    private String ESC= "null";
     //上坡辅助
-    private String HSA;
+    private String HSA= "null";
     //自动驻车
-    private String autoStop;
+    private String autoStop= "null";
     //陡坡缓降
-    private String steepSlopeSlow;
+    private String steepSlopeSlow= "null";
     //可变悬架
-    private String changeableHanger;
+    private String changeableHanger= "null";
     //空气悬架
-    private String airHanger;
+    private String airHanger= "null";
     //可变转向比
-    private String changeableTurn;
+    private String changeableTurn= "null";
     //前桥限滑差速器/差速锁
-    private String frontSpeedLock;
+    private String frontSpeedLock= "null";
     //中央差速器锁止功能
-    private String coreSpeedLock;
+    private String coreSpeedLock= "null";
     //后桥限滑差速器/差速锁
-    private String backSpeedLock;
+    private String backSpeedLock= "null";
 
     /** 外部配置 */
     //电动天窗
-    private String powerSunroof;
+    private String powerSunroof= "null";
     //全景天窗
-    private String panoramicSunroof;
+    private String panoramicSunroof= "null";
     //运动外观套件
-    private String sportAppearancePackage;
+    private String sportAppearancePackage= "null";
     //铝合金轮圈
-    private String aluminumRim;
+    private String aluminumRim= "null";
     //电动吸合门
-    private String electricDoor;
+    private String electricDoor= "null";
     //侧滑门
-    private String slidingDoors;
+    private String slidingDoors= "null";
     //电动后备厢
-    private String electricTrunk;
+    private String electricTrunk= "null";
     //感应后备厢
-    private String inductionTrunk;
+    private String inductionTrunk= "null";
     //车顶行李架
-    private String roofRack;
+    private String roofRack= "null";
 
     /**内部配置*/
     //真皮方向盘
-    private String leatherSteeringWheel;
+    private String leatherSteeringWheel= "null";
     //方向盘调节
-    private String steeringWheelAdjustment;
+    private String steeringWheelAdjustment= "null";
     //方向盘电动调节
-    private String electricControl;
+    private String electricControl= "null";
     //多功能方向盘
-    private String multifunctionSteeringWheel;
+    private String multifunctionSteeringWheel= "null";
     //方向盘换挡
-    private String steeringWheelShift;
+    private String steeringWheelShift= "null";
     //方向盘加热
-    private String steeringWheelHeating;
+    private String steeringWheelHeating= "null";
     //方向盘记忆
-    private String steeringWheelMemory;
+    private String steeringWheelMemory= "null";
     //定速巡航
-    private String cruise;
+    private String cruise= "null";
     //前/后驻车雷达
-    private String parkingRadar;
-    private String frontParkingRadar;
-    private String backParkingRadar;
+    private String parkingRadar= "null";
+    private String frontParkingRadar= "null";
+    private String backParkingRadar= "null";
     //倒车视频影像
-    private String reverseVideoImage;
+    private String reverseVideoImage= "null";
     //行车电脑显示屏
-    private String drivingComputerDisplay;
+    private String drivingComputerDisplay= "null";
     //全液晶仪表盘
-    private String fullLcdInstrumentPanel;
+    private String fullLcdInstrumentPanel= "null";
     //HUD抬头数字显示
-    private String HUD;
+    private String HUD= "null";
 
     /** 座椅配置 */
     //座椅材质
-    private String seatMaterial;
+    private String seatMaterial= "null";
     //运动风格座椅
-    private String sportsStyleSeats;
+    private String sportsStyleSeats= "null";
     //座椅高低调节
-    private String seatHeightAdjustment;
+    private String seatHeightAdjustment= "null";
     //腰部支撑调节
-    private String lumbarSupportAdjustment;
+    private String lumbarSupportAdjustment= "null";
     //肩部支撑调节
-    private String shoulderSupportAdjustment;
+    private String shoulderSupportAdjustment= "null";
     //主/副驾驶座电动调节
-    private String driverElectricControl;
-    private String mainDriverElectricControl;
-    private String copilotDriverElectricControl;
+    private String driverElectricControl= "null";
+    private String mainDriverElectricControl= "null";
+    private String copilotDriverElectricControl= "null";
     //第二排靠背角度调节
-    private String secondRowBackrest;
+    private String secondRowBackrest= "null";
     //第二排座椅移动
-    private String secondSeatMove;
+    private String secondSeatMove= "null";
     //后排座椅电动调节
-    private String rearSeatElectricAdjustment;
+    private String rearSeatElectricAdjustment= "null";
     //电动座椅记忆
-    private String electricChairMemory;
+    private String electricChairMemory= "null";
     //前/后排座椅加热
-    private String seatHeating;
-    private String frontSeatHeating;
-    private String backSeatHeating;
+    private String seatHeating= "null";
+    private String frontSeatHeating= "null";
+    private String backSeatHeating= "null";
     //前/后排座椅通风
-    private String seatVentilation;
-    private String frontSeatVentilation;
-    private String backSeatVentilation;
+    private String seatVentilation= "null";
+    private String frontSeatVentilation= "null";
+    private String backSeatVentilation= "null";
     //前/后排座椅按摩
-    private String seatMassage;
-    private String frontSeatMassage;
-    private String backSeatMassage;
+    private String seatMassage= "null";
+    private String frontSeatMassage= "null";
+    private String backSeatMassage= "null";
     //第三排座椅
-    private String thirdRowSeat;
+    private String thirdRowSeat= "null";
     //后排座椅放倒方式
-    private String rearSeatsReclineWay;
+    private String rearSeatsReclineWay= "null";
     //前/后中央扶手
-    private String centerArmrest;
-    private String frontCenterArmrest;
-    private String backCenterArmrest;
+    private String centerArmrest= "null";
+    private String frontCenterArmrest= "null";
+    private String backCenterArmrest= "null";
     //后排杯架
-    private String backCupHolder;
+    private String backCupHolder= "null";
 
     /** 多媒体配置 */
     //GPS导航系统
-    private String gps;
+    private String gps= "null";
     //定位互动服务
-    private String locationService;
+    private String locationService= "null";
     //中控台彩色大屏
-    private String consoleColorScreen;
+    private String consoleColorScreen= "null";
     //蓝牙/车载电话
-    private String bluetoothTelephone;
+    private String bluetoothTelephone= "null";
     //车载电视
-    private String carTV;
+    private String carTV= "null";
     //后排液晶屏
-    private String rearLCD;
+    private String rearLCD= "null";
     //220V/230V电源
-    private String powerSupply;
+    private String powerSupply= "null";
     //外接音源接口
-    private String externalAudioInterface;
+    private String externalAudioInterface= "null";
     //CD支持MP3/WMA
-    private String cdSupportMp3;
+    private String cdSupportMp3= "null";
     //多媒体系统
-    private String multimediaSystem;
+    private String multimediaSystem= "null";
     //扬声器品牌
-    private String loudspeakersBrand;
+    private String loudspeakersBrand= "null";
     //扬声器数量
-    private String loudspeakersNum;
+    private String loudspeakersNum= "null";
 
     /** 灯光配置 */
     //近光灯
-    private String dippedHeadlight;
+    private String dippedHeadlight= "null";
     //远光灯
-    private String highBeam;
+    private String highBeam= "null";
     //日间行车灯
-    private String daytimeLights;
+    private String daytimeLights= "null";
     //自适应远近光
-    private String adaptiveLights;
+    private String adaptiveLights= "null";
     //自动头灯
-    private String automaticHeadlights;
+    private String automaticHeadlights= "null";
     //转向辅助灯
-    private String steeringAssistLamp;
+    private String steeringAssistLamp= "null";
     //转向头灯
-    private String steeringHeadlamp;
+    private String steeringHeadlamp= "null";
     //前雾灯
-    private String frontFogLamp;
+    private String frontFogLamp= "null";
     //大灯高度可调
-    private String headlightHeightAdjustable;
+    private String headlightHeightAdjustable= "null";
     //大灯清洗装置
-    private String cleaningDevice;
+    private String cleaningDevice= "null";
     //车内氛围灯
-    private String ambientLighting;
+    private String ambientLighting= "null";
 
     /** 玻璃/后视镜 */
     //前/后电动车窗
-    private String powerWindow;
-    private String frontPowerWindow;
-    private String backPowerWindow;
+    private String powerWindow= "null";
+    private String frontPowerWindow= "null";
+    private String backPowerWindow= "null";
     //车窗防夹手功能
-    private String antitrappingHandFunction;
+    private String antitrappingHandFunction= "null";
     //防紫外线/隔热玻璃
-    private String uvGlass;
+    private String uvGlass= "null";
     //后视镜电动调节
-    private String rearviewMirrorElectricAdjustment;
+    private String rearviewMirrorElectricAdjustment= "null";
     //后视镜加热
-    private String rearviewMirrorHeating;
+    private String rearviewMirrorHeating= "null";
     //内/外后视镜自动防眩目
-    private String antiGlareRearviewMirror;
-    private String innerAntiGlareRearviewMirror;
-    private String outerAntiGlareRearviewMirror;
+    private String antiGlareRearviewMirror= "null";
+    private String innerAntiGlareRearviewMirror= "null";
+    private String outerAntiGlareRearviewMirror= "null";
     //后视镜电动折叠
-    private String rearviewMirrorElectricFolding;
+    private String rearviewMirrorElectricFolding= "null";
     //后视镜记忆
-    private String mirrorMemory;
+    private String mirrorMemory= "null";
     //后风挡遮阳帘
-    private String sunShade;
+    private String sunShade= "null";
     //后排侧遮阳帘
-    private String rearSideCurtain;
+    private String rearSideCurtain= "null";
     //后排侧隐私玻璃
-    private String rearSidePrivacyGlass;
+    private String rearSidePrivacyGlass= "null";
     //遮阳板化妆镜
-    private String sunVisorMirrors;
+    private String sunVisorMirrors= "null";
     //后雨刷
-    private String rearWiper;
+    private String rearWiper= "null";
     //感应雨刷
-    private String wiper;
+    private String wiper= "null";
 
     /** 空调/冰箱 */
     //空调控制方式
-    private String airConditioningControlMode;
-    private String mTAirConditioningControlMode;
-    private String aTAirConditioningControlMode;
+    private String airConditioningControlMode= "null";
+    private String mTAirConditioningControlMode= "null";
+    private String aTAirConditioningControlMode= "null";
     //后排独立空调
-    private String rearIndependentAirConditioning;
+    private String rearIndependentAirConditioning= "null";
     //后座出风口
-    private String rearAirOutlet;
+    private String rearAirOutlet= "null";
     //温度分区控制
-    private String temperatureZoneControl;
+    private String temperatureZoneControl= "null";
     //车内空气调节/花粉过滤
-    private String carAirConditioning;
+    private String carAirConditioning= "null";
     //车载冰箱
-    private String carRefrigerator;
+    private String carRefrigerator= "null";
 
     /**高科技配置 */
     //自动泊车入位
-    private String automaticParking;
+    private String automaticParking= "null";
     //发动机启停技术
-    private String engineStartStopTechnology;
+    private String engineStartStopTechnology= "null";
     //并线辅助
-    private String auxiliary;
+    private String auxiliary= "null";
     //车道偏离预警系统
-    private String laneDepartureWarningSystem;
+    private String laneDepartureWarningSystem= "null";
     //主动刹车/主动安全系统
-    private String activeSafetySystem;
+    private String activeSafetySystem= "null";
     //整体主动转向系统
-    private String integralActiveSteeringSystem;
+    private String integralActiveSteeringSystem= "null";
     //夜视系统
-    private String nightVisionSystem;
+    private String nightVisionSystem= "null";
     //中控液晶屏分屏显示
-    private String controlLCD;
+    private String controlLCD= "null";
     //自适应巡航
-    private String adaptiveCruise;
+    private String adaptiveCruise= "null";
     //全景摄像头
-    private String panoramicCamera;
+    private String panoramicCamera= "null";
     //外观颜色
-    private String appearanceColor;
+    private String appearanceColor= "null";
     //内饰颜色
-    private String interiorColor;
+    private String interiorColor= "null";
 
 
     public String getVid() {
