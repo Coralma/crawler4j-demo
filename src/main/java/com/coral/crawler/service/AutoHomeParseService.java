@@ -142,13 +142,13 @@ public class AutoHomeParseService {
                             }else if(itemName.equals("厂商")) {
                                 v.setManufacturer(convertValue(value));
                             }else if(itemName.equals("级别")) {
-                                v.setLevel(convertValue(value));
+                                v.setVehicleLevel(convertValue(value));
                             }else if(itemName.equals("发动机")) {
                                 v.setEngine(convertValue(value));
                             }else if(itemName.equals("变速箱")) {
                                 v.setGearBox(convertValue(value));
                             }else if(itemName.equals("长*宽*高(mm)")) {
-                                v.setSize(convertValue(value));
+                                v.setVehicleSize(convertValue(value));
                             }else if(categoryName.equals("基本参数") && itemName.equals("车身结构")) {
                                 v.setStructure(convertValue(value));
                             }else if(itemName.equals("最高车速(km/h)")) {
@@ -537,7 +537,7 @@ public class AutoHomeParseService {
                             } else if(itemName.equals("防紫外线/隔热玻璃")) {
                                 v.setUvGlass(convertValue(value));
                             } else if(itemName.equals("后视镜电动调节")) {
-                                v.setRearviewMirrorElectricAdjustment(convertValue(value));
+                                v.setRearviewMirrorAdjustment(convertValue(value));
                             } else if(itemName.equals("后视镜加热")) {
                                 v.setRearviewMirrorHeating(convertValue(value));
                             } else if(itemName.equals("内/外后视镜自动防眩目")) {
