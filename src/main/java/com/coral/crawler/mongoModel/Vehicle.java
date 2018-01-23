@@ -24,15 +24,15 @@ public class Vehicle extends MBaseEntity {
     //厂商
     private String manufacturer= "null";
     //级别
-    private String level= "null";
+    private String vehicleLevel= "null";
     // 上市时间（New）
     private String marketTime= "null";
     //发动机
     private String engine= "null";
     //变速箱
     private String gearBox= "null";
-    //长*宽*高(mm)
-    private String size= "null";
+    //长*宽*高(mm) (size to vehicleSize)
+    private String vehicleSize= "null";
     //车身结构
     private String structure= "null";
     //最高车速(km/h)
@@ -382,7 +382,7 @@ public class Vehicle extends MBaseEntity {
     //防紫外线/隔热玻璃
     private String uvGlass= "null";
     //后视镜电动调节
-    private String rearviewMirrorElectricAdjustment= "null";
+    private String rearviewMirrorAdjustment= "null";
     //后视镜加热
     private String rearviewMirrorHeating= "null";
     //内/外后视镜自动防眩目
@@ -481,14 +481,6 @@ public class Vehicle extends MBaseEntity {
         this.manufacturer = manufacturer;
     }
 
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
     public String getEngine() {
         return engine;
     }
@@ -505,13 +497,6 @@ public class Vehicle extends MBaseEntity {
         this.gearBox = gearBox;
     }
 
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
 
     public String getSpeed() {
         return speed;
@@ -1721,14 +1706,6 @@ public class Vehicle extends MBaseEntity {
         this.uvGlass = uvGlass;
     }
 
-    public String getRearviewMirrorElectricAdjustment() {
-        return rearviewMirrorElectricAdjustment;
-    }
-
-    public void setRearviewMirrorElectricAdjustment(String rearviewMirrorElectricAdjustment) {
-        this.rearviewMirrorElectricAdjustment = rearviewMirrorElectricAdjustment;
-    }
-
     public String getRearviewMirrorHeating() {
         return rearviewMirrorHeating;
     }
@@ -2151,5 +2128,29 @@ public class Vehicle extends MBaseEntity {
 
     public void setMarketTime(String marketTime) {
         this.marketTime = marketTime;
+    }
+
+    public String getVehicleLevel() {
+        return vehicleLevel;
+    }
+
+    public void setVehicleLevel(String vehicleLevel) {
+        this.vehicleLevel = vehicleLevel;
+    }
+
+    public String getVehicleSize() {
+        return vehicleSize;
+    }
+
+    public void setVehicleSize(String vehicleSize) {
+        this.vehicleSize = vehicleSize;
+    }
+
+    public String getRearviewMirrorAdjustment() {
+        return rearviewMirrorAdjustment;
+    }
+
+    public void setRearviewMirrorAdjustment(String rearviewMirrorAdjustment) {
+        this.rearviewMirrorAdjustment = rearviewMirrorAdjustment;
     }
 }
