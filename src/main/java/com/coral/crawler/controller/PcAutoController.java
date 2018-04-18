@@ -33,7 +33,7 @@ public class PcAutoController {
             System.out.println("Init Url: " + url);
         }
 
-/*        String url = "http://price.pcauto.com.cn/sg1726/config.html";
+        /*String url = "http://price.pcauto.com.cn/sg1726/config.html";
         controller.addSeed(url, 1726);*/
 
         controller.start(PcAutoCrawler.class, numberOfCrawlers);

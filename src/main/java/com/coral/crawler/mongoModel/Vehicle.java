@@ -19,6 +19,10 @@ public class Vehicle extends MBaseEntity {
     /** 基本参数 */
     //车型名称
     private String name= "null";
+    //车系
+    private String series="null";
+    //年款
+    private String year="null";
     //厂商指导价(元)
     private String price= "null";
     //厂商
@@ -2152,5 +2156,21 @@ public class Vehicle extends MBaseEntity {
 
     public void setRearviewMirrorAdjustment(String rearviewMirrorAdjustment) {
         this.rearviewMirrorAdjustment = rearviewMirrorAdjustment;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }

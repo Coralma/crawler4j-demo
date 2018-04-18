@@ -1,8 +1,6 @@
 package com.coral.crawler.service;
 
-import com.coral.crawler.model.pcauto.PcAutoConfig;
-import com.coral.crawler.model.pcauto.PcAutoItem;
-import com.coral.crawler.model.pcauto.PcAutoModelExcessId;
+import com.coral.crawler.model.pcauto.*;
 import com.coral.crawler.mongoDao.CrawlURLDao;
 import com.coral.crawler.mongoDao.HistoryURLDao;
 import com.coral.crawler.mongoDao.VehicleDao;
@@ -10,13 +8,13 @@ import com.coral.crawler.mongoModel.CrawlURL;
 import com.coral.crawler.mongoModel.HistoryURL;
 import com.coral.crawler.mongoModel.Vehicle;
 import com.google.gson.Gson;
-import edu.uci.ics.crawler4j.parser.HtmlParseData;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.google.gson.stream.JsonReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.StringReader;
 import java.util.Date;
 import java.util.List;
 
@@ -94,6 +92,13 @@ public class PcAutoService {
                     //** 基本参数 *//
                     if(itemName.equals("车型名称")) {
                         v.setName(convertValue(value));
+                        if(v.getName() != null) {
+                            String[] nameSplit = v.getName().split(" ");
+                            v.setSeries(nameSplit[0]);
+                            if(nameSplit.length>1) {
+                                v.setYear(nameSplit[1]);
+                            }
+                        }
                     } else if(itemName.equals("厂商指导价(元)")) {
                         v.setPrice(convertValue(value));
                     }else if(itemName.equals("厂商")) {
@@ -547,13 +552,56 @@ public class PcAutoService {
                         v.setAdaptiveCruise(convertValue(value));
                     } else if(itemName.equals("全景摄像头")) {
                         v.setPanoramicCamera(convertValue(value));
-                    } else if(itemName.equals("外观颜色")) {
-                        v.setAppearanceColor(convertValue(value));
-                    } else if(itemName.equals("内饰颜色")) {
-                        v.setInteriorColor(convertValue(value));
                     }
                 }
             }
+
+            PcAutoColor appearanceColor = buildAppearanceColor(html);
+            if(appearanceColor != null) {
+                PcAutoColorItem[] items = appearanceColor.getBody().getItems();
+                for(int i=0;i<items.length;i++) {
+                    String colorStr = "";
+                    PcAutoColorItem item = items[i];
+                    PcAutoColorList[] colorLists = item.getColorList();
+                    int index = 0, colorIndex = colorLists.length - 1;
+                    for(PcAutoColorList color : colorLists) {
+                        if(index < colorIndex) {
+                            colorStr = colorStr + color.getName() + ", ";
+                        }
+                        if(index == (colorIndex)) {
+                            colorStr = colorStr + color.getName();
+                        }
+                        index++;
+                    }
+                    vehicles[i].setAppearanceColor(convertValue(colorStr));
+                }
+            }
+
+            PcAutoColor innerColor = buildInnerColor(html);
+            if(innerColor != null) {
+                PcAutoColorItem[] items = innerColor.getBody().getItems();
+                for(int i=0;i<items.length;i++) {
+                    String colorStr = "";
+                    PcAutoColorItem item = items[i];
+                    PcAutoColorList[] colorLists = item.getInnerColorList();
+                    int index = 0, colorIndex = colorLists.length - 1;
+                    for(PcAutoColorList color : colorLists) {
+                        if(index < colorIndex) {
+                            colorStr = colorStr + color.getName() + ", ";
+                        }
+                        if(index == (colorIndex)) {
+                            colorStr = colorStr + color.getName();
+                        }
+                        index++;
+                    }
+                    vehicles[i].setInteriorColor(convertValue(colorStr));
+                }
+            }
+             /*else if(itemName.equals("外观颜色")) {
+                v.setAppearanceColor(convertValue(value));
+            } else if(itemName.equals("内饰颜色")) {
+                v.setInteriorColor(convertValue(value));
+            }*/
         } catch(Exception e) {
             System.out.println("URL: " + url + " no data.");
 /*              e.printStackTrace();*/
@@ -612,7 +660,9 @@ public class PcAutoService {
         int jsonEndIndex = configJson.indexOf(endStr);
         configJson = configJson.substring(startStr.length(),jsonEndIndex + (endStr.length()-1)).trim();
         /*System.out.println(configJson);*/
-        PcAutoConfig pcAutoConfig = gson.fromJson(configJson, PcAutoConfig.class);
+        JsonReader reader = new JsonReader(new StringReader(configJson));
+        reader.setLenient(true);
+        PcAutoConfig pcAutoConfig = gson.fromJson(reader, PcAutoConfig.class);
         return pcAutoConfig;
     }
 
@@ -628,6 +678,34 @@ public class PcAutoService {
         optionJson = optionJson.substring(starStr.length(),jsonEndIndex + (endStr.length()-1)).trim();
         PcAutoConfig pcAutoConfig = gson.fromJson(optionJson,PcAutoConfig.class);
         return pcAutoConfig;
+    }
+
+    private PcAutoColor buildAppearanceColor(String html) {
+        String starStr = "var color =";
+        int jsonIndex = html.lastIndexOf(starStr);
+        if(jsonIndex < 0) {
+            return null;
+        }
+        String colorJson = html.substring(jsonIndex);
+        String endStr = "}] }};";
+        int jsonEndIndex = colorJson.indexOf(endStr);
+        colorJson = colorJson.substring(starStr.length(),jsonEndIndex+(endStr.length()-1)).trim();
+        PcAutoColor pcAutoAppearanceColor = gson.fromJson(colorJson, PcAutoColor.class);
+        return pcAutoAppearanceColor;
+    }
+
+    private PcAutoColor buildInnerColor(String html) {
+        String starStr = "var innerColor =";
+        int jsonIndex = html.lastIndexOf(starStr);
+        if(jsonIndex < 0) {
+            return null;
+        }
+        String colorJson = html.substring(jsonIndex);
+        String endStr = "}] }};";
+        int jsonEndIndex = colorJson.indexOf(endStr);
+        colorJson = colorJson.substring(starStr.length(),jsonEndIndex+(endStr.length()-1)).trim();
+        PcAutoColor pcAutoAppearanceColor = gson.fromJson(colorJson, PcAutoColor.class);
+        return pcAutoAppearanceColor;
     }
 
     private void saveHistoryURL(String html,int cid) {
@@ -674,5 +752,12 @@ public class PcAutoService {
         dao = (VehicleDao) ctx.getBean(VehicleDao.SPRING_BEAN_NAME);
         crawlURLDao = (CrawlURLDao) ctx.getBean(CrawlURLDao.SPRING_BEAN_NAME);
         historyURLDao = (HistoryURLDao)ctx.getBean(HistoryURLDao.SPRING_BEAN_NAME);
+    }
+
+
+    public static void main(String[] args) {
+        PcAutoService service = new PcAutoService();
+        String[] spv = service.splitMultipleValue("前1@@后1");
+        System.out.println(spv);
     }
 }

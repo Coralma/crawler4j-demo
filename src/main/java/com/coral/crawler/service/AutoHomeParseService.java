@@ -137,10 +137,15 @@ public class AutoHomeParseService {
                             /** 基本参数 */
                             if(itemName.equals("车型名称")) {
                                 v.setName(convertValue(value));
+                                if(v.getName() != null) {
+                                    v.setSeries(v.getName().split(" ")[0]);
+                                }
                             } else if(itemName.equals("厂商指导价(元)")) {
                                 v.setPrice(convertValue(value));
                             }else if(itemName.equals("厂商")) {
                                 v.setManufacturer(convertValue(value));
+                            }else if(itemName.equals("上市时间")) {
+                                v.setMarketTime(convertValue(value));
                             }else if(itemName.equals("级别")) {
                                 v.setVehicleLevel(convertValue(value));
                             }else if(itemName.equals("发动机")) {
