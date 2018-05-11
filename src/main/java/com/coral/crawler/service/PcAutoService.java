@@ -484,9 +484,9 @@ public class PcAutoService {
 
                         //** 玻璃/后视镜 *//*
                     } else if(itemName.equals("前电动车窗")) {
-                        v.setFrontPowerWindow(value);
+                        v.setFrontPowerWindow(convertValue(value));
                     } else if(itemName.equals("后电动车窗")) {
-                        v.setBackPowerWindow(value);
+                        v.setBackPowerWindow(convertValue(value));
                     } else if(itemName.equals("车窗防夹手功能")) {
                         v.setAntitrappingHandFunction(convertValue(value));
                     } else if(itemName.equals("防紫外线/隔热玻璃")) {
